@@ -23,6 +23,12 @@ export const addItemModalClose = () => {
     type: actionTypes.ADD_ITEM_MODAL_CLOSE,
   };
 };
+export const addItemFileChange = (event) => {
+  return {
+    type: actionTypes.ADD_ITEM_FILE_CHANGE,
+    file: event.target.files[0],
+  };
+};
 export const addItem = (formData, token) => {
   return (dispatch) => {
     dispatch(addItemStart());

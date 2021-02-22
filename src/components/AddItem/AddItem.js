@@ -263,10 +263,21 @@ class AddItem extends Component {
     formIsValid: false,
     fileUrl: "",
     fileError: false,
+    file: null,
   };
-  formHandler = (event) => {
+  formHandler = async (event) => {
     event.preventDefault();
-    const formData = { userId: this.props.userId, fileUrl: this.state.fileUrl };
+    const storageRef = app.storage().ref(`${this.props.userId}/`);
+    const fileRef = storageRef.child(
+      new Date().getTime() + this.props.file.name
+    );
+    await fileRef
+      .put(this.props.file)
+      .catch((error) => this.setState({ fileError: error }));
+    const formData = {
+      userId: this.props.userId,
+      fileUrl: await fileRef.getDownloadURL(),
+    };
     for (let formElementIdentifier in this.state.form) {
       formData[formElementIdentifier] = this.state.form[
         formElementIdentifier
@@ -275,16 +286,8 @@ class AddItem extends Component {
     this.props.onFormSubmit(formData, this.props.token);
     console.log(this.props.error);
   };
-  fileChange = async (event) => {
-    const file = event.target.files[0];
-    const storageRef = app.storage().ref(`${this.props.userId}/`);
-    const fileRef = storageRef.child(new Date().getTime() + file.name);
-    await fileRef
-      .put(file)
-      .catch((error) => this.setState({ fileError: error }));
-    this.setState({ fileUrl: await fileRef.getDownloadURL() });
-    console.log(this.state.fileUrl);
-  };
+  fileChange = (event) => this.setState({ file: event.target.files[0] });
+  fileSubmit = async () => {};
   modalClose = () => {
     this.props.showModal = false;
   };
@@ -360,7 +363,7 @@ class AddItem extends Component {
           ))}
           <input
             type="file"
-            onChange={this.fileChange}
+            onChange={(event) => this.props.onFileChange(event)}
             accept=".png, .jpg, .jpeg"
           />
           <Button
@@ -382,6 +385,7 @@ const mapStateToProps = (state) => {
     error: state.addItem.error,
     token: state.auth.token,
     userId: state.auth.userId,
+    file: state.addItem.file,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -389,6 +393,7 @@ const mapDispatchToProps = (dispatch) => {
     onFormSubmit: (formData, token) =>
       dispatch(actions.addItem(formData, token)),
     onModalClose: () => dispatch(actions.addItemModalClose()),
+    onFileChange: (event) => dispatch(actions.addItemFileChange(event)),
   };
 };
 

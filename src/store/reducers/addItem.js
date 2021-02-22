@@ -1,22 +1,17 @@
 import * as actionTypes from "../actions/actionTypes";
 const initialState = {
-  myPhones: [],
   loading: false,
   showModal: false,
   error: false,
+  file: null,
 };
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_ITEM_SUCCESS:
-      const newItem = {
-        ...action.phone,
-        phoneId: action.phoneId,
-      };
       return {
         ...state,
         loading: false,
         error: false,
-        phones: state.myPhones.concat(newItem),
         showModal: true,
       };
     case actionTypes.ADD_ITEM_FAILED:
@@ -36,6 +31,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         showModal: false,
         error: false,
+      };
+    case actionTypes.ADD_ITEM_FILE_CHANGE:
+      return {
+        ...state,
+        file: action.file,
       };
     default:
       return state;

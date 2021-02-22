@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
 import Button from "../../UI/Button/Button";
-import { app } from "../../../base";
 
 class MyItem extends Component {
   deleteMyItemHandler = () => {
