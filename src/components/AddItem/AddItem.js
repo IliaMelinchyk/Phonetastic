@@ -261,10 +261,12 @@ class AddItem extends Component {
       },
     },
     formIsValid: false,
+    fileUrl: "",
+    fileError: false,
   };
   formHandler = (event) => {
     event.preventDefault();
-    const formData = { userId: this.props.userId };
+    const formData = { userId: this.props.userId, fileUrl: this.state.fileUrl };
     for (let formElementIdentifier in this.state.form) {
       formData[formElementIdentifier] = this.state.form[
         formElementIdentifier
@@ -273,13 +275,15 @@ class AddItem extends Component {
     this.props.onFormSubmit(formData, this.props.token);
     console.log(this.props.error);
   };
-  fileChange = (event) => {
+  fileChange = async (event) => {
     const file = event.target.files[0];
-    const storageRef = app.storage().ref();
-    const fileRef = storageRef.child(file.name);
-    fileRef.put(file).then(() => {
-      console.log("uploaded file", file.name);
-    });
+    const storageRef = app.storage().ref(`${this.props.userId}/`);
+    const fileRef = storageRef.child(new Date().getTime() + file.name);
+    await fileRef
+      .put(file)
+      .catch((error) => this.setState({ fileError: error }));
+    this.setState({ fileUrl: await fileRef.getDownloadURL() });
+    console.log(this.state.fileUrl);
   };
   modalClose = () => {
     this.props.showModal = false;
@@ -325,8 +329,10 @@ class AddItem extends Component {
           modalClosed={this.props.onModalClose}
         >
           <h3>
-            {this.props.error
-              ? `${this.props.error}. Please try again later!`
+            {this.props.error || this.state.fileError
+              ? `${
+                  this.props.error || this.state.fileError
+                }. Please try again later!`
               : "Phone added to market successfully! You can add another one in a form below, or browse our market to find yourself a new one."}
           </h3>
         </Modal>
@@ -352,7 +358,11 @@ class AddItem extends Component {
               }
             />
           ))}
-          <input type="file" onChange={this.fileChange} />
+          <input
+            type="file"
+            onChange={this.fileChange}
+            accept=".png, .jpg, .jpeg"
+          />
           <Button
             btnType="Success"
             disabled={!this.state.formIsValid}

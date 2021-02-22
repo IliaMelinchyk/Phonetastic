@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios-orders";
+import { app } from "../../base";
 export const initMyItemsFailed = (error) => {
   return {
     type: actionTypes.INIT_MY_ITEMS_FAILED,
@@ -36,7 +37,7 @@ export const initMyItems = (userId = false) => {
       });
   };
 };
-export const itemDelete = (itemId, token, userId) => {
+export const itemDelete = (itemId, token, userId, fileUrl) => {
   return (dispatch) => {
     axios
       .delete(`/phones/${itemId}.json?auth=${token}`)
@@ -44,6 +45,13 @@ export const itemDelete = (itemId, token, userId) => {
         console.log(res);
         dispatch(initMyItems(userId));
       })
+      .catch((error) => {
+        dispatch(initMyItemsFailed(error.message));
+      });
+    app
+      .storage()
+      .refFromURL(fileUrl)
+      .delete()
       .catch((error) => {
         dispatch(initMyItemsFailed(error.message));
       });

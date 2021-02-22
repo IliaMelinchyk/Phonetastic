@@ -2,10 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
 import Button from "../../UI/Button/Button";
+import { app } from "../../../base";
 
 class MyItem extends Component {
   deleteMyItemHandler = () => {
-    this.props.onItemDelete(this.props.id, this.props.token, this.props.userId);
+    this.props.onItemDelete(
+      this.props.id,
+      this.props.token,
+      this.props.userId,
+      this.props.item.fileUrl
+    );
   };
   render() {
     const {
@@ -21,12 +27,14 @@ class MyItem extends Component {
       ram,
       model,
       manufacturer,
+      fileUrl,
     } = this.props.item;
     return (
       <div>
         <p>Model: {model}</p>
         <p>Manufacturer: {manufacturer}</p>
         <p>id: {this.props.id}</p>
+        <img src={fileUrl} alt={this.props.id} />
         <Button clicked={this.deleteMyItemHandler} btnType="Success">
           DELETE
         </Button>
@@ -42,8 +50,8 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    onItemDelete: (itemId, token, userId) =>
-      dispatch(actions.itemDelete(itemId, token, userId)),
+    onItemDelete: (itemId, token, userId, fileUrl) =>
+      dispatch(actions.itemDelete(itemId, token, userId, fileUrl)),
   };
 };
 

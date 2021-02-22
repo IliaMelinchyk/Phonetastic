@@ -8,7 +8,8 @@ class MyItemModal extends Component {
     this.props.onItemDelete(
       this.props.item.id,
       this.props.token,
-      this.props.userId
+      this.props.userId,
+      this.props.item.fileUrl
     );
     this.props.modalClosed();
   };
@@ -26,6 +27,7 @@ class MyItemModal extends Component {
       ram,
       model,
       manufacturer,
+      fileUrl,
     } = this.props.item;
     return (
       <div>
@@ -46,8 +48,8 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    onItemDelete: (itemId, token, userId) =>
-      dispatch(actions.itemDelete(itemId, token, userId)),
+    onItemDelete: (itemId, token, userId, fileUrl) =>
+      dispatch(actions.itemDelete(itemId, token, userId, fileUrl)),
   };
 };
 
