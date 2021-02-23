@@ -18,13 +18,12 @@ export const initMyItemsStart = () => {
     type: actionTypes.INIT_MY_ITEMS_START,
   };
 };
-export const initMyItems = (userId = false) => {
+export const initMyItems = (userId) => {
   return (dispatch) => {
     dispatch(initMyItemsStart());
     // заменить ? на & если добавлю ?auth=
-    const queryParams = `?orderBy="userId"&equalTo="${userId}"`;
     axios
-      .get(`/phones.json${userId ? queryParams : ""}`)
+      .get(`/phones.json?orderBy="userId"&equalTo="${userId}"`)
       .then((res) => {
         const fetchedItems = [];
         for (let key in res.data) {

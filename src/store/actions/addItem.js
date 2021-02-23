@@ -25,6 +25,7 @@ export const addItemModalClose = () => {
   };
 };
 export const addItemFileChange = (event) => {
+  console.log(event.target.files[0]);
   return {
     type: actionTypes.ADD_ITEM_FILE_CHANGE,
     file: event.target.files[0],

@@ -264,16 +264,20 @@ class AddItem extends Component {
   };
   formHandler = async (event) => {
     event.preventDefault();
-    await this.props.onAddItemFile(this.props.userId, this.props.file);
+    if (this.props.file) {
+      await this.props.onAddItemFile(this.props.userId, this.props.file);
+    }
     const formData = {
       userId: this.props.userId,
       fileUrl: this.props.fileUrl,
+      date: Date.now(),
     };
     for (let formElementIdentifier in this.state.form) {
       formData[formElementIdentifier] = this.state.form[
         formElementIdentifier
       ].value;
     }
+    console.log(formData);
     this.props.onFormSubmit(formData, this.props.token);
     console.log(this.props.error);
   };

@@ -4,7 +4,8 @@ const initialState = {
   showModal: false,
   error: false,
   file: null,
-  fileUrl: "",
+  fileUrl:
+    "https://www.91-img.com/pictures/135611-v6-xiaomi-redmi-8a-mobile-phone-large-1.jpg?tr=q-60",
 };
 const reducer = (state = initialState, action) => {
   switch (action.type) {

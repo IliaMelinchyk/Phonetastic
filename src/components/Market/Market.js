@@ -5,20 +5,20 @@ import Modal from "../UI/Modal/Modal";
 import Spinner from "../UI/Spinner/Spinner";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
+import { app } from "../../base";
+import withFirebasePagination from "firebase-react-paginated";
 
 class Market extends Component {
   state = { showModal: false, phone: null };
-  componentDidMount() {
-    this.props.onInitMyItems();
-  }
-  switchModal = async (item) => {
+  switchModal = (item) => {
     this.setState((prevState) => {
       return {
         showModal: !prevState.showModal,
       };
     });
-    await this.setState({ phone: item });
-    console.log(this.state.phone);
+    this.setState({ phone: item.value });
+    console.log(this.state.phone, this.props.pageItems);
+    console.log(new Date().getTime(), Date.now());
   };
   render() {
     return (
@@ -31,31 +31,38 @@ class Market extends Component {
             />
           </Modal>
         ) : null}
-        {this.props.loading ? <Spinner /> : null}
+        {this.props.isLoading ? <Spinner /> : null}
         {this.props.error ? (
           <h3>{this.props.error}. Please try again later!</h3>
         ) : (
-          this.props.phones.map((item) => (
-            <div key={item.id}>
-              <button onClick={() => this.switchModal(item)}>VIEW</button>
-              <MarketItem id={item.id} item={item} />
-            </div>
-          ))
+          <ul>
+            {this.props.pageItems.map((item) => (
+              <li key={item.id}>
+                <MarketItem id={item.value.id} item={item.value} />
+                <button onClick={() => this.switchModal(item)}>VIEW</button>
+              </li>
+            ))}
+          </ul>
         )}
+        <button
+          disabled={!this.props.hasPrevPage}
+          onClick={this.props.onPrevPage}
+        >
+          newer
+        </button>
+        <button
+          disabled={!this.props.hasNextPage}
+          onClick={this.props.onNextPage}
+        >
+          older
+        </button>
       </div>
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    error: state.myItems.error,
-    phones: state.myItems.phones,
-    loading: state.myItems.loading,
-  };
-};
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onInitMyItems: () => dispatch(actions.initMyItems()),
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Market);
+
+export default withFirebasePagination(app)({
+  path: "/phones",
+  orderBy: "date",
+  length: 4,
+})(Market);
