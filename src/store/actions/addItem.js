@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios-orders";
+import { app } from "../../base";
 export const addItemSuccess = (id, item) => {
   return {
     type: actionTypes.ADD_ITEM_SUCCESS,
@@ -29,6 +30,12 @@ export const addItemFileChange = (event) => {
     file: event.target.files[0],
   };
 };
+export const addItemFileUrl = (fileUrl) => {
+  return {
+    type: actionTypes.ADD_ITEM_FILE_URL,
+    fileUrl: fileUrl,
+  };
+};
 export const addItem = (formData, token) => {
   return (dispatch) => {
     dispatch(addItemStart());
@@ -37,22 +44,18 @@ export const addItem = (formData, token) => {
       .then((res) => {
         console.log(res.data);
         dispatch(addItemSuccess(res.data.name, formData));
-        // this.setState({
-        //   loading: false,
-        //   success: true,
-        //   error: false,
-        //   showModal: true,
-        // });
       })
       .catch((error) => {
         dispatch(addItemFail(error));
         console.log(error);
-        // this.setState({
-        //   loading: false,
-        //   success: false,
-        //   error: error.message,
-        //   showModal: true,
-        // });
       });
+  };
+};
+export const addItemFile = (userId, file) => {
+  return async (dispatch) => {
+    const storageRef = app.storage().ref(`${userId}/`);
+    const fileRef = storageRef.child(new Date().getTime() + file.name);
+    await fileRef.put(file).catch((error) => dispatch(addItemFail(error)));
+    dispatch(addItemFileUrl(await fileRef.getDownloadURL()));
   };
 };

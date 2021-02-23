@@ -6,6 +6,7 @@ export const ADD_ITEM_FAILED = "ADD_ITEM_FAILED";
 export const ADD_ITEM_START = "ADD_ITEM_START";
 export const ADD_ITEM_MODAL_CLOSE = "ADD_ITEM_MODAL_CLOSE";
 export const ADD_ITEM_FILE_CHANGE = "ADD_ITEM_FILE_CHANGE";
+export const ADD_ITEM_FILE_URL = "ADD_ITEM_FILE_URL";
 export const AUTH_START = "AUTH_START";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_FAIL = "AUTH_FAIL";

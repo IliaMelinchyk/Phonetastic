@@ -33,6 +33,7 @@ class MyItemModal extends Component {
       <div>
         <p>Model: {model}</p>
         <p>Manufacturer: {manufacturer}</p>
+        <img src={fileUrl} alt={this.props.id} />
         <Button clicked={this.deleteMyItemHandler} btnType="Success">
           DELETE
         </Button>

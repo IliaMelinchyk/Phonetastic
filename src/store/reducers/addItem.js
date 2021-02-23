@@ -4,6 +4,7 @@ const initialState = {
   showModal: false,
   error: false,
   file: null,
+  fileUrl: "",
 };
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -36,6 +37,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         file: action.file,
+      };
+    case actionTypes.ADD_ITEM_FILE_URL:
+      return {
+        ...state,
+        fileUrl: action.fileUrl,
       };
     default:
       return state;
