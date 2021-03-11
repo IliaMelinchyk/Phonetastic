@@ -1,3 +1,82 @@
-.Invalid {
-  border: 1px solid red;
+@import "../../../variables.scss";
+.Input {
+  width: 25%;
+  @include respond(1550px) {
+    width: 50%;
+  }
+  @include respond(850px) {
+    width: 100%;
+    padding: 0;
+  }
+  padding: 10px;
+  box-sizing: border-box;
+  align-self: center;
+  color: inherit;
+  & span {
+    margin-left: 2px;
+  }
+}
+.Label {
+  font-weight: 500;
+  display: block;
+  margin: 8px 0;
+}
+.InputElement {
+  outline: none;
+  border: 1px solid $gray;
+  background-color: rgba($gray, 0.3);
+  font: inherit;
+  color: inherit;
+  padding: 6px 10px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  &:focus {
+    outline: none;
+    background-color: rgba($blue, 0.3);
+  }
+}
+.Option {
+  color: $black;
+  font-weight: 500;
+}
+.Invalid,
+.Input:invalid {
+  border: 1px solid $red;
+  background-color: rgba($red, 0.3);
+  &:focus {
+    background-color: rgba($red, 0.3);
+  }
+}
+.Number {
+  width: 100%;
+  text-align: center;
+  display: inline;
+  // @include respond(1550px) {
+  //   width: 60px;
+  // }
+}
+#Number {
+  width: 6.25%;
+  @include respond(1550px) {
+    width: 12.5%;
+  }
+  @include respond(850px) {
+    width: 20%;
+  }
+  @include respond(450px) {
+    width: 45%;
+  }
+  & .Label {
+    word-spacing: 9999999px;
+  }
+}
+#Textarea {
+  width: 50%;
+  @include respond(1300px) {
+    width: 100%;
+  }
+}
+.Textarea {
+  // overflow: hidden;
 }

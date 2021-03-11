@@ -1,0 +1,56 @@
+@import "../../variables.scss";
+.Error {
+  background-color: $red;
+  color: $black;
+  width: 100vw;
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 56px;
+}
+.Buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.FormElement {
+  display: flex;
+  & div {
+    padding: 20px;
+  }
+  & div:first-child {
+    color: $white;
+    width: 50%;
+  }
+  & div:nth-child(2) {
+    width: 50%;
+    color: $black;
+  }
+}
+@media (min-width: 1200px) {
+  .FormElement {
+    // flex-direction: column;
+    // align-items: flex-start;
+    flex-wrap: wrap;
+    width: 50%;
+    & div:first-child {
+      width: 100%;
+    }
+    & div:nth-child(2) {
+      padding-top: 0;
+      width: 100%;
+      color: $white;
+    }
+  }
+  .Form {
+    display: flex;
+  }
+  .Buttons {
+    flex-direction: column;
+    padding-left: 10px;
+    padding-top: 28px;
+    & button {
+      margin-top: 20px;
+    }
+  }
+}

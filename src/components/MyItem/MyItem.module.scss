@@ -1,0 +1,137 @@
+@import "../../variables.scss";
+.CenterAbs {
+  position: absolute;
+  top: 38%;
+  right: 40%;
+  transform: translate(50%, -50%);
+  color: $red;
+  font-weight: 500;
+  font-size: 20px;
+}
+.ListElement:nth-child(even) {
+  // background-color: $black;
+  color: $black;
+  border-top: 8px solid $black;
+  & li:not(:last-child) {
+    border-bottom: 2px solid $black;
+  }
+  & .Image {
+    outline: 2px solid $black;
+    outline-offset: -20px;
+    background-color: $white;
+  }
+}
+.ListElement:nth-child(odd) {
+  // background-color: $white;
+  color: $white;
+  border-top: 8px solid $white;
+  & li:not(:last-child) {
+    border-bottom: 2px solid $white;
+  }
+  & .Image {
+    outline: 2px solid $white;
+    outline-offset: -20px;
+    background-color: $black;
+  }
+}
+.ListElement {
+  list-style: none;
+  width: 50%;
+  &:first-child,
+  &:nth-child(2) {
+    border-top: none;
+  }
+  & li {
+    display: flex;
+    align-items: baseline;
+    & p:first-child {
+      // display: block;
+      // float: left;
+      width: 145px;
+      // flex-basis: 145px;
+      flex-shrink: 0;
+    }
+    & p {
+      margin: 0;
+      word-break: break-all;
+    }
+  }
+}
+.Image {
+  max-height: 200px;
+  width: auto;
+  max-width: 200px;
+  cursor: pointer;
+  float: right;
+  padding: 20px;
+  margin-right: 1px;
+}
+
+.Characteristics {
+  padding: 20px 20px 0;
+  list-style: none;
+  overflow-wrap: break-word;
+  font-size: 15px;
+  // display: flex;
+  // flex-direction: column;
+  // flex-wrap: wrap;
+}
+.Delete {
+  display: flex;
+  justify-content: center;
+}
+@media (max-width: 950px) {
+  .Image {
+    display: block;
+    float: none;
+    margin: 0 auto;
+  }
+  .Characteristics {
+    padding: 0 20px;
+  }
+}
+@media (max-width: 600px) {
+  .ListElement:nth-child(even) {
+    color: $white;
+    border-top: 8px solid $darkgray;
+    & li:not(:last-child) {
+      border-bottom: 2px solid $white;
+    }
+    .Image {
+      outline: 2px solid $darkgray;
+      outline-offset: -20px;
+      background-color: transparent;
+    }
+  }
+  .ListElement:nth-child(odd) {
+    color: $white;
+    border-top: 8px solid $darkgray;
+    & li:not(:last-child) {
+      border-bottom: 2px solid $white;
+    }
+    .Image {
+      outline: 2px solid $darkgray;
+      outline-offset: -20px;
+      background-color: transparent;
+    }
+  }
+  .Characteristics {
+    background-color: $darkgray;
+    padding: 10px;
+    margin: 0 20px;
+  }
+  .ListElement {
+    width: 100%;
+    color: $gray;
+    &:first-child {
+      border-top: none;
+    }
+    & li {
+      font-size: 12px;
+    }
+  }
+  .Delete {
+    justify-content: start;
+    margin-left: 10px;
+  }
+}

@@ -1,27 +1,53 @@
+@import "../../../variables.scss";
 .Button {
   background-color: transparent;
-  border: none;
-  color: white;
+  color: $beige;
   outline: none;
   cursor: pointer;
   font: inherit;
   padding: 10px;
   margin: 10px;
   font-weight: bold;
+  text-align: center;
+  position: relative;
+  &:not(:disabled):active {
+    bottom: -5px;
+  }
 }
-
-.Button:first-of-type {
-  margin-left: 0;
-  padding-left: 0;
-}
+// .Button:first-of-type {
+//   margin-left: 0;
+//   padding-left: 0;
+// }
 .Button:disabled {
-  color: #ccc;
+  color: $gray;
   cursor: not-allowed;
+  border: 2px solid $gray;
 }
 .Success {
-  color: #5c9210;
+  color: $blue;
+  border: 2px solid $blue;
+  &:not(:disabled):hover {
+    background-color: $blue;
+    color: $white;
+  }
 }
-
 .Danger {
-  color: #944317;
+  color: $red;
+  border: 2px solid $red;
+  &:not(:disabled):hover {
+    background-color: $red;
+    color: $white;
+  }
+}
+.Page {
+  // width: 100px;
+  color: $yellow;
+  border: 2px solid $yellow;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  &:not(:disabled):hover {
+    background-color: $yellow;
+    color: $black;
+  }
 }

@@ -37,6 +37,13 @@ export const addItemFileUrl = (fileUrl) => {
     fileUrl: fileUrl,
   };
 };
+export const addItemFileUnmount = () => {
+  return {
+    type: actionTypes.ADD_ITEM_FILE_UNMOUNT,
+    fileUrl: "",
+    file: null,
+  };
+};
 export const addItem = (formData, token) => {
   return (dispatch) => {
     dispatch(addItemStart());

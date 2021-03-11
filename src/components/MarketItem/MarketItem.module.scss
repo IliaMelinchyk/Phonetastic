@@ -1,0 +1,96 @@
+@import "../../variables.scss";
+
+.ListElement {
+  color: $black;
+  width: 250px;
+  height: 416px;
+  background-color: #394850;
+  box-shadow: 3px 3px 4px 0px $black;
+  border-radius: 40px;
+  padding: 35px;
+  margin: 0 5px;
+  position: relative;
+  & li {
+    // display: flex;
+    // align-items: center;
+    text-align: center;
+    font-size: 15px;
+    line-height: 22px;
+    & p:first-child {
+      // width: 150px;
+      // flex-shrink: 0;
+    }
+    & p {
+      margin: 0;
+      word-break: break-all;
+      // display: flex;
+      // align-items: center;
+    }
+    &:not(:last-child) {
+      border-bottom: 2px solid #394850;
+    }
+  }
+  & button {
+    background-color: #78909c;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 5px 10px;
+    margin: 15px 0;
+    font-weight: bold;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    transform: translateX(50%);
+    box-shadow: 1px 1px 3px 1px $black;
+    &:hover,
+    &:focus {
+      bottom: 2px;
+      box-shadow: 1px 4px 3px 1px $black;
+    }
+    &:active {
+      box-shadow: none;
+      bottom: -2px;
+      box-shadow: 0px 1px 5px 1px $black;
+    }
+  }
+}
+.Characteristics {
+  list-style: none;
+  padding: 10px;
+  background-color: #b9ddfa;
+  border-radius: 10px;
+  height: calc(100% - 50px);
+}
+// .CenterAbs {
+//   position: absolute;
+//   top: 50%;
+//   right: 50%;
+//   transform: translate(50%, -50%);
+// }
+
+@mixin listItem($color) {
+  color: $color;
+  position: relative;
+  & svg {
+    position: absolute;
+    fill: $color;
+    font-size: 34px;
+    top: 4px;
+    left: 0;
+  }
+}
+.Resolution {
+  @include listItem(#52050a);
+}
+.Price {
+  @include listItem(#0cca4a);
+}
+.Memory {
+  @include listItem(#de6449);
+}
+.MainInfo {
+  @include listItem(#b56576);
+}

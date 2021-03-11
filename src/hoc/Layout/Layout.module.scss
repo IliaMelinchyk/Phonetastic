@@ -1,0 +1,11 @@
+@import "../../variables.scss";
+.Background {
+  min-height: calc(100vh - 86px);
+  background: linear-gradient(
+    to right,
+    $black 0%,
+    $black 50%,
+    $white 50%,
+    $white 100%
+  );
+}

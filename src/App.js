@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import { Route, withRouter, Redirect } from "react-router-dom";
-import Layout from "./components/Layout/Layout";
-import Logout from "./components/Auth/Logout/Logout";
+import Layout from "./hoc/Layout/Layout";
+import Logout from "./containers/Auth/Logout/Logout";
 import { connect } from "react-redux";
 import * as actions from "./store/actions/index";
-import AsyncComponent from "./components/AsyncComponent/AsyncComponent";
+import AsyncComponent from "./hoc/AsyncComponent/AsyncComponent";
 
 const asyncAddItem = AsyncComponent(() =>
-  import("./components/AddItem/AddItem")
+  import("./containers/AddItem/AddItem")
 );
-const asyncMarket = AsyncComponent(() => import("./components/Market/Market"));
-const asyncAuth = AsyncComponent(() => import("./components/Auth/Auth"));
+const asyncMarket = AsyncComponent(() => import("./containers/Market/Market"));
+const asyncAuth = AsyncComponent(() => import("./containers/Auth/Auth"));
 const asyncMyItems = AsyncComponent(() =>
-  import("./components/MyItems/MyItems")
+  import("./containers/MyItems/MyItems")
 );
 class App extends Component {
   componentDidMount() {
@@ -38,9 +38,9 @@ class App extends Component {
       );
     }
     return (
-      <div>
+      <>
         <Layout>{routes}</Layout>
-      </div>
+      </>
     );
   }
 }

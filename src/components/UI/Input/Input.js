@@ -3,7 +3,10 @@ import classes from "./Input.module.scss";
 
 const Input = (props) => {
   let inputElement = null;
-  const inputClasses = [classes.InputElement];
+  const inputClasses = [
+    classes.InputElement,
+    classes[props.elementConfig.type],
+  ];
   if (props.invalid && props.shouldValidate && props.touched)
     inputClasses.push(classes.Invalid);
   switch (props.inputtype) {
@@ -40,9 +43,9 @@ const Input = (props) => {
           name={props.nameId}
           onChange={props.changed}
         >
-          {props.elementConfig.options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.displayValue}
+          {props.elementConfig.options.map((option, index) => (
+            <option className={classes.Option} key={index} value={option}>
+              {option}
             </option>
           ))}
         </select>
@@ -61,8 +64,10 @@ const Input = (props) => {
       );
   }
   return (
-    <div>
-      <label htmlFor={props.nameId}>{props.label}</label>
+    <div className={classes.Input} id={classes[props.elementConfig.type]}>
+      <label className={classes.Label} htmlFor={props.nameId}>
+        {props.label}
+      </label>
       {inputElement}
       {props.after ? <span>{props.after}</span> : null}
     </div>

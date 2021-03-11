@@ -42,14 +42,16 @@ export const itemDelete = (itemId, token, userId, fileUrl) => {
       .delete(`/phones/${itemId}.json?auth=${token}`)
       .then((res) => {
         console.log(res);
-        app
-          .storage()
-          .refFromURL(fileUrl)
-          .delete()
-          .then(() => dispatch(initMyItems(userId)))
-          .catch((error) => {
-            dispatch(initMyItemsFailed(error.message));
-          });
+        if (fileUrl) {
+          app
+            .storage()
+            .refFromURL(fileUrl)
+            .delete()
+            .then(() => dispatch(initMyItems(userId)))
+            .catch((error) => {
+              dispatch(initMyItemsFailed(error.message));
+            });
+        } else dispatch(initMyItems(userId));
       })
       .catch((error) => {
         dispatch(initMyItemsFailed(error.message));

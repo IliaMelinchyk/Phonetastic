@@ -1,0 +1,13 @@
+$black: #141115;
+$darkgray: #6e675f;
+$gray: #a39594;
+$beige: #edebd7;
+$white: #f5fbef;
+$yellow: #e3b23c;
+$red: #d72638;
+$blue: #3f88c5;
+@mixin respond($breakpoint) {
+  @media only screen and (max-width: $breakpoint) {
+    @content;
+  }
+}

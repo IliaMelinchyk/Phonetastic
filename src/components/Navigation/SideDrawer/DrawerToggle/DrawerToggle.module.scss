@@ -1,3 +1,4 @@
+@import "../../../../variables.scss";
 .DrawerToggle {
   width: 40px;
   height: 100%;
@@ -13,10 +14,10 @@
 .DrawerToggle div {
   width: 90%;
   height: 3px;
-  background-color: black;
+  background-color: $white;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 710px) {
   .DrawerToggle {
     display: none;
   }
