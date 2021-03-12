@@ -5,8 +5,8 @@
 /.pnp
 .pnp.js
 /.firebase
-/.github/workflows
-/.config
+/.github
+/config
 /.scripts
 .firebaserc.json
 firebase.json
