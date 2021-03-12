@@ -15,11 +15,14 @@ import { FcPhoneAndroid } from "react-icons/fc";
 
 const Market = (props) => {
   const [showModal, setShowModal] = useState(false);
+
   const [phone, setPhone] = useState({});
+
   const switchModal = (item) => {
     setShowModal(!showModal);
     if (showModal === false) setPhone(item);
   };
+
   return (
     <div className={classes.MarketWrapper}>
       <Modal noBackground show={showModal} modalClosed={switchModal}>
