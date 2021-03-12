@@ -1,5 +1,4 @@
 @import "../../variables.scss";
-
 .ListElement {
   color: $black;
   width: 250px;
@@ -11,20 +10,12 @@
   margin: 0 5px;
   position: relative;
   & li {
-    // display: flex;
-    // align-items: center;
     text-align: center;
     font-size: 15px;
     line-height: 22px;
-    & p:first-child {
-      // width: 150px;
-      // flex-shrink: 0;
-    }
     & p {
       margin: 0;
       word-break: break-all;
-      // display: flex;
-      // align-items: center;
     }
     &:not(:last-child) {
       border-bottom: 2px solid #394850;
@@ -64,13 +55,6 @@
   border-radius: 10px;
   height: calc(100% - 50px);
 }
-// .CenterAbs {
-//   position: absolute;
-//   top: 50%;
-//   right: 50%;
-//   transform: translate(50%, -50%);
-// }
-
 @mixin listItem($color) {
   color: $color;
   position: relative;

@@ -1,4 +1,5 @@
 import * as actionTypes from "../actions/actionTypes";
+
 const initialState = {
   loading: false,
   showModal: false,
@@ -6,6 +7,7 @@ const initialState = {
   file: null,
   fileUrl: "",
 };
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_ITEM_SUCCESS:
@@ -53,4 +55,5 @@ const reducer = (state = initialState, action) => {
       return state;
   }
 };
+
 export default reducer;

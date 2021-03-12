@@ -1,7 +1,6 @@
 @import "../../../variables.scss";
 .Modal {
   position: fixed;
-  // z-index: 500;
   background-color: $white;
   width: 70%;
   border: 1px solid $darkgray;
@@ -13,7 +12,6 @@
   transition: all 0.3s ease-out;
   color: $black;
 }
-
 @media (min-width: 600px) {
   .Modal {
     width: 500px;
@@ -22,11 +20,7 @@
 }
 .NoBackground {
   color: $black;
-
   position: fixed;
-  // z-index: 500;
-  // max-width: 100%;
-  // max-height: 100%;
   box-sizing: border-box;
   top: 50%;
   left: 50%;

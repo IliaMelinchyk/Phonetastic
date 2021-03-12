@@ -3,6 +3,13 @@
   position: relative;
   min-height: calc(100vh - 88px);
 }
+.NotAuthenticated {
+  background-color: $blue;
+  color: $black;
+  width: 100vw;
+  text-align: center;
+  margin: 0;
+}
 .Pagination {
   position: absolute;
   bottom: 0;

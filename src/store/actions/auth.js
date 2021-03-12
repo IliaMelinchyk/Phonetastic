@@ -6,6 +6,7 @@ export const authStart = () => {
     type: actionTypes.AUTH_START,
   };
 };
+
 export const authSuccess = (token, userId) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
@@ -13,12 +14,14 @@ export const authSuccess = (token, userId) => {
     userId: userId,
   };
 };
+
 export const authFail = (error) => {
   return {
     type: actionTypes.AUTH_FAIL,
     error: error,
   };
 };
+
 export const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("expirationDate");
@@ -27,6 +30,7 @@ export const logout = () => {
     type: actionTypes.AUTH_LOGOUT,
   };
 };
+
 export const checkAuthTimeout = (expirationTime) => {
   return (dispatch) => {
     setTimeout(() => {
@@ -34,6 +38,7 @@ export const checkAuthTimeout = (expirationTime) => {
     }, expirationTime * 1000);
   };
 };
+
 export const auth = (email, password, isSignup) => {
   return (dispatch) => {
     dispatch(authStart());
@@ -49,7 +54,6 @@ export const auth = (email, password, isSignup) => {
     axios
       .post(url, authData)
       .then((response) => {
-        console.log(response);
         const expirationDate = new Date(
           new Date().getTime() + response.data.expiresIn * 1000
         );
@@ -60,11 +64,11 @@ export const auth = (email, password, isSignup) => {
         dispatch(checkAuthTimeout(response.data.expiresIn));
       })
       .catch((error) => {
-        console.log(error.response.data.error.message);
         dispatch(authFail(error.response.data.error.message));
       });
   };
 };
+
 export const authCheckState = () => {
   return (dispatch) => {
     const token = localStorage.getItem("token");

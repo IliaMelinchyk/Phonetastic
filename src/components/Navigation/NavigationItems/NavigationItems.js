@@ -2,7 +2,7 @@ import React from "react";
 import NavigationItem from "./NavigationItem/NavigationItem";
 import classes from "./NavigationItems.module.scss";
 
-const navigationItems = (props) => (
+const NavigationItems = (props) => (
   <ul className={classes.NavigationItems}>
     {props.isAuthenticated ? (
       <>
@@ -18,4 +18,5 @@ const navigationItems = (props) => (
     )}
   </ul>
 );
-export default navigationItems;
+
+export default NavigationItems;

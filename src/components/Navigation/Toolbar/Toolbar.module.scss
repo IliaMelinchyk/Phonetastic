@@ -16,17 +16,6 @@
     height: 100%;
   }
 }
-
-@media (max-width: 710px) {
-  .DesktopOnly {
-    display: none;
-  }
-}
-@media (max-width: 940px) {
-  .Subheader {
-    display: none;
-  }
-}
 .Logo {
   font-size: 45px;
   fill: $black;
@@ -46,4 +35,14 @@
 }
 .Black {
   color: $black;
+}
+@media (max-width: 710px) {
+  .DesktopOnly {
+    display: none;
+  }
+}
+@media (max-width: 940px) {
+  .Subheader {
+    display: none;
+  }
 }

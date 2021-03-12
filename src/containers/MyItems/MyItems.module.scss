@@ -1,5 +1,4 @@
 @import "../../variables.scss";
-
 .Error {
   color: $red;
   font-size: 20px;
@@ -18,9 +17,6 @@
     z-index: -1;
   }
 }
-// .List:nth-child(2n) {
-//   background-color: $white;
-// }
 .List {
   display: flex;
   flex-wrap: wrap;

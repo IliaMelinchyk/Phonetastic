@@ -1,10 +1,10 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
-import * as actions from "../../store/actions/index";
-import { connect } from "react-redux";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import { Redirect } from "react-router-dom";
+import * as actions from "../../store/actions/index";
 import classes from "./Auth.module.scss";
 
 export class Auth extends Component {
@@ -21,6 +21,8 @@ export class Auth extends Component {
         validation: {
           required: true,
           isEmail: true,
+          minLength: 6,
+          maxLength: 30,
         },
         valid: false,
         touched: false,
@@ -36,6 +38,7 @@ export class Auth extends Component {
         validation: {
           required: true,
           minLength: 6,
+          maxLength: 30,
         },
         valid: false,
         touched: false,
@@ -43,8 +46,11 @@ export class Auth extends Component {
     },
     isSignup: true,
   };
+
   checkValidity(value, rules) {
     let isValid = true;
+
+    // checking rule conditions and making input invalid if they are not met
     if (rules.required) isValid = value.trim() !== "" && isValid;
     if (rules.minLength) isValid = value.length >= rules.minLength && isValid;
     if (rules.maxLength) isValid = value.length <= rules.maxLength && isValid;
@@ -52,9 +58,12 @@ export class Auth extends Component {
       const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
       isValid = pattern.test(value.toLowerCase()) && isValid;
     }
+
     return isValid;
   }
+
   inputChangedHandler = (event, controlName) => {
+    // spreading state, updating controls with input value and checking their validity
     const updatedControls = {
       ...this.state.controls,
       [controlName]: {
@@ -67,30 +76,38 @@ export class Auth extends Component {
         touched: true,
       },
     };
+
     this.setState({ controls: updatedControls });
   };
+
   submitHandler = (event) => {
     event.preventDefault();
+    // sending authorization request to firebase
     this.props.onAuth(
       this.state.controls.email.value,
       this.state.controls.password.value,
       this.state.isSignup
     );
   };
+
   signUpHandler = () => {
     this.setState({ isSignup: true });
   };
+
   signInHandler = () => {
     this.setState({ isSignup: false });
   };
+
   render() {
     const formElementsArray = [];
+
     for (let key in this.state.controls) {
       formElementsArray.push({
         id: key,
         config: this.state.controls[key],
       });
     }
+
     const form = formElementsArray.map((formElement) => (
       <Input
         key={formElement.id}
@@ -132,6 +149,7 @@ export class Auth extends Component {
     );
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     loading: state.auth.loading,
@@ -139,10 +157,12 @@ const mapStateToProps = (state) => {
     isAuthenticated: state.auth.token !== null,
   };
 };
+
 const mapDispatchToProps = (dispatch) => {
   return {
     onAuth: (email, password, isSignup) =>
       dispatch(actions.auth(email, password, isSignup)),
   };
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);

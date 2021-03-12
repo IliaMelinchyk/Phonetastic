@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import axios from "../../axios-orders";
+import { connect } from "react-redux";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import Modal from "../../components/UI/Modal/Modal";
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
-import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
-import { app } from "../../base";
 import classes from "./AddItem.module.scss";
 
 class AddItem extends Component {
@@ -190,9 +188,9 @@ class AddItem extends Component {
         label: `Your contact email`,
         validation: {
           required: true,
+          isEmail: true,
           minLength: 6,
           maxLength: 30,
-          isEmail: true,
         },
         valid: false,
         touched: false,
@@ -207,9 +205,9 @@ class AddItem extends Component {
         label: `Your phone number`,
         validation: {
           required: true,
+          isNumeric: true,
           minLength: 6,
           maxLength: 20,
-          isNumeric: true,
         },
         valid: false,
         touched: false,
@@ -221,7 +219,6 @@ class AddItem extends Component {
           placeholder: `Tell us about your phone here!`,
           maxLength: "200",
           rows: 5,
-          // cols: "40",
         },
         value: "",
         label: `Additional info (optional)`,
@@ -234,30 +231,11 @@ class AddItem extends Component {
     },
     formIsValid: false,
   };
-  formHandler = async (event) => {
-    event.preventDefault();
-    if (this.props.file) {
-      await this.props.onAddItemFile(this.props.userId, this.props.file);
-    }
-    const formData = {
-      userId: this.props.userId,
-      fileUrl: this.props.fileUrl,
-      date: Date.now(),
-    };
-    for (let formElementIdentifier in this.state.form) {
-      formData[formElementIdentifier] = this.state.form[
-        formElementIdentifier
-      ].value;
-    }
-    console.log(formData);
-    this.props.onFormSubmit(formData, this.props.token);
-    console.log(this.props.error);
-  };
-  modalClose = () => {
-    this.props.showModal = false;
-  };
+
   checkValidity(value, rules) {
     let isValid = true;
+
+    // checking rule conditions and making input invalid if they are not met
     if (rules.required) isValid = value.trim() !== "" && isValid;
     if (rules.minLength) isValid = value.length >= rules.minLength && isValid;
     if (rules.maxLength) isValid = value.length <= rules.maxLength && isValid;
@@ -269,42 +247,91 @@ class AddItem extends Component {
       const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
       isValid = pattern.test(value.toLowerCase()) && isValid;
     }
+
     return isValid;
   }
+
   inputChangedHandler = (event, inputIdentifier) => {
+    // spreading form from state to update it
     const updatedForm = {
       ...this.state.form,
     };
+
+    // spreading specific element in form from state to update it
     const updatedFormElement = { ...updatedForm[inputIdentifier] };
+
+    // updating form element with input value
     updatedFormElement.value = event.target.value;
+
+    // invoking validity function to check value
     updatedFormElement.valid = this.checkValidity(
       updatedFormElement.value,
       updatedFormElement.validation
     );
+
     updatedFormElement.touched = true;
-    console.log(updatedFormElement);
+
+    // updating form with new form element
     updatedForm[inputIdentifier] = updatedFormElement;
+
     let formIsValid = true;
+
+    // cycling through updated form to check if every element is valid and,therefore, if form is valid
     for (let inputIdentifier in updatedForm) {
       formIsValid = updatedForm[inputIdentifier].valid && formIsValid;
     }
+
     this.setState({ form: updatedForm, formIsValid: formIsValid });
   };
-  componentWillUnmount() {
-    this.props.onFileUnmount();
-  }
+
+  formHandler = async (event) => {
+    event.preventDefault();
+
+    // adding image to firebase storage and getting it's link
+    if (this.props.file) {
+      await this.props.onAddItemFile(this.props.userId, this.props.file);
+    }
+
+    // adding image link, user id and date to form
+    const formData = {
+      userId: this.props.userId,
+      fileUrl: this.props.fileUrl,
+      date: Date.now(),
+    };
+
+    // adding input values to form
+    for (let formElementIdentifier in this.state.form) {
+      formData[formElementIdentifier] = this.state.form[
+        formElementIdentifier
+      ].value;
+    }
+
+    // sending form data to firebase database
+    this.props.onFormSubmit(formData, this.props.token);
+  };
+
   modalClose = () => {
+    // directing to market when modal is closed
     this.props.history.push("/");
+
     this.props.onModalClose();
   };
+
+  componentWillUnmount() {
+    // deleting file from form on unmount
+    this.props.onFileUnmount();
+  }
+
   render() {
     const formElementsArray = [];
+
     for (let key in this.state.form) {
       formElementsArray.push({
         id: key,
         config: this.state.form[key],
       });
     }
+
     return (
       <div>
         {this.props.loading ? <Spinner /> : null}
@@ -363,6 +390,7 @@ class AddItem extends Component {
     );
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     loading: state.addItem.loading,
@@ -374,6 +402,7 @@ const mapStateToProps = (state) => {
     file: state.addItem.file,
   };
 };
+
 const mapDispatchToProps = (dispatch) => {
   return {
     onFormSubmit: (formData, token) =>

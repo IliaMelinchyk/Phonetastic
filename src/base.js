@@ -1,5 +1,6 @@
 import firebase from "firebase";
 import "firebase/storage";
+
 export const app = firebase.initializeApp({
   projectId: "phone-market-76651",
   appId: "1:21635168216:web:2f796ff557552d49f7e4ad",

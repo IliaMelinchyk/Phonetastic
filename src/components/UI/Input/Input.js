@@ -3,12 +3,15 @@ import classes from "./Input.module.scss";
 
 const Input = (props) => {
   let inputElement = null;
+
   const inputClasses = [
     classes.InputElement,
     classes[props.elementConfig.type],
   ];
+
   if (props.invalid && props.shouldValidate && props.touched)
     inputClasses.push(classes.Invalid);
+
   switch (props.inputtype) {
     case "input":
       inputElement = (
@@ -63,6 +66,7 @@ const Input = (props) => {
         />
       );
   }
+
   return (
     <div className={classes.Input} id={classes[props.elementConfig.type]}>
       <label className={classes.Label} htmlFor={props.nameId}>

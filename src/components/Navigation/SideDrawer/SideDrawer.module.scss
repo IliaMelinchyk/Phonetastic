@@ -12,17 +12,14 @@
   box-sizing: border-box;
   transition: transform 0.3s ease-out;
 }
-
+.Open {
+  transform: translateX(0);
+}
+.Close {
+  transform: translateX(-100%);
+}
 @media (min-width: 710px) {
   .SideDrawer {
     display: none;
   }
-}
-
-.Open {
-  transform: translateX(0);
-}
-
-.Close {
-  transform: translateX(-100%);
 }

@@ -1,91 +1,87 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import withFirebasePagination from "firebase-react-paginated";
+import { app } from "../../base";
 import MarketItem from "../../components/MarketItem/MarketItem";
 import MarketModal from "../../components/MarketModal/MarketModal";
 import Modal from "../../components/UI/Modal/Modal";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import { connect } from "react-redux";
-import * as actions from "../../store/actions/index";
-import { app } from "../../base";
-import withFirebasePagination from "firebase-react-paginated";
-import classes from "./Market.module.scss";
 import Button from "../../components/UI/Button/Button";
+import classes from "./Market.module.scss";
 import {
   HiOutlineArrowCircleLeft,
   HiOutlineArrowCircleRight,
 } from "react-icons/hi";
 import { FcPhoneAndroid } from "react-icons/fc";
 
-class Market extends Component {
-  state = { showModal: false, phone: {} };
-  switchModal = (item) => {
-    this.setState((prevState) => {
-      return {
-        showModal: !prevState.showModal,
-      };
-    });
-    if (!this.state.showModal) this.setState({ phone: item });
+const Market = (props) => {
+  const [showModal, setShowModal] = useState(false);
+  const [phone, setPhone] = useState({});
+  const switchModal = (item) => {
+    setShowModal(!showModal);
+    if (showModal === false) setPhone(item);
   };
-  render() {
-    return (
-      <div className={classes.MarketWrapper}>
-        <Modal
-          noBackground
-          show={this.state.showModal}
-          modalClosed={this.switchModal}
-        >
-          <MarketModal item={this.state.phone} modalClosed={this.switchModal} />
-        </Modal>
-        {this.props.error ? (
-          <h4 className={classes.Error}>
-            <FcPhoneAndroid />
-            {this.props.error}
-            <br /> Please try again later!
-          </h4>
-        ) : (
+  return (
+    <div className={classes.MarketWrapper}>
+      <Modal noBackground show={showModal} modalClosed={switchModal}>
+        <MarketModal item={phone} modalClosed={switchModal} />
+      </Modal>
+      {props.error ? (
+        <h4 className={classes.Error}>
+          <FcPhoneAndroid />
+          {props.error}
+          <br /> Please try again later!
+        </h4>
+      ) : (
+        <>
+          {props.notAuthenticated ? (
+            <h4 className={classes.NotAuthenticated}>
+              Log in to sell your old phone on our market!
+            </h4>
+          ) : null}
           <ul className={classes.List}>
-            {this.props.pageItems.map((item) => (
+            {props.pageItems.map((item) => (
               <MarketItem
                 key={item.id}
                 item={item.value}
-                clicked={(item) => this.switchModal(item)}
+                clicked={(item) => switchModal(item)}
               />
             ))}
           </ul>
-        )}
-        {this.props.isLoading ? (
-          <Spinner />
-        ) : !this.props.error ? (
-          <div className={classes.Pagination}>
-            <Button
-              btnType="Page"
-              disabled={!this.props.hasPrevPage}
-              clicked={this.props.onPrevPage}
-            >
-              <HiOutlineArrowCircleLeft style={{ fontSize: "45px" }} />
-              <span>
-                PREV
-                <br />
-                PAGE
-              </span>
-            </Button>
-            <Button
-              btnType="Page"
-              disabled={!this.props.hasNextPage}
-              clicked={this.props.onNextPage}
-            >
-              <span>
-                NEXT
-                <br />
-                PAGE
-              </span>
-              <HiOutlineArrowCircleRight style={{ fontSize: "45px" }} />
-            </Button>
-          </div>
-        ) : null}
-      </div>
-    );
-  }
-}
+        </>
+      )}
+      {props.isLoading ? (
+        <Spinner />
+      ) : !props.error ? (
+        <div className={classes.Pagination}>
+          <Button
+            btnType="Page"
+            disabled={!props.hasPrevPage}
+            clicked={props.onPrevPage}
+          >
+            <HiOutlineArrowCircleLeft style={{ fontSize: "45px" }} />
+            <span>
+              PREV
+              <br />
+              PAGE
+            </span>
+          </Button>
+          <Button
+            btnType="Page"
+            disabled={!props.hasNextPage}
+            clicked={props.onNextPage}
+          >
+            <span>
+              NEXT
+              <br />
+              PAGE
+            </span>
+            <HiOutlineArrowCircleRight style={{ fontSize: "45px" }} />
+          </Button>
+        </div>
+      ) : null}
+    </div>
+  );
+};
 
 export default withFirebasePagination(app)({
   path: "/phones",

@@ -1,10 +1,10 @@
 import React from "react";
 import NavigationItems from "../NavigationItems/NavigationItems";
 import DrawerToggle from "../SideDrawer/DrawerToggle/DrawerToggle";
-import { SiAdobephonegap } from "react-icons/si";
 import classes from "./Toolbar.module.scss";
+import { SiAdobephonegap } from "react-icons/si";
 
-const toolbar = (props) => (
+const Toolbar = (props) => (
   <header className={classes.Toolbar}>
     <SiAdobephonegap className={classes.Logo} />
     <div className={classes.Header}>
@@ -24,4 +24,5 @@ const toolbar = (props) => (
     <DrawerToggle clicked={props.drawerToggleClicked} />
   </header>
 );
-export default toolbar;
+
+export default Toolbar;

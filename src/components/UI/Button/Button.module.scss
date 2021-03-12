@@ -14,10 +14,6 @@
     bottom: -5px;
   }
 }
-// .Button:first-of-type {
-//   margin-left: 0;
-//   padding-left: 0;
-// }
 .Button:disabled {
   color: $gray;
   cursor: not-allowed;
@@ -40,7 +36,6 @@
   }
 }
 .Page {
-  // width: 100px;
   color: $yellow;
   border: 2px solid $yellow;
   display: flex;
