@@ -21,3 +21,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/.firebase
+/.github/workflows
+/.config
+/.scripts
+.firebaserc.json
+firebase.json
+firestore.indexes.json
+firestore.rules
+storage.rules
