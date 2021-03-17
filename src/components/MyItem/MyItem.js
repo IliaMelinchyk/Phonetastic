@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import Button from "../UI/Button/Button";
+import { formatDate } from "../../shared/utility";
 import classes from "./MyItem.module.scss";
 import NoImage from "../../assets/images/noimg.png";
 
@@ -22,14 +23,7 @@ const MyItem = (props) => {
     fileUrl,
   } = props.item;
 
-  const date = new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    hour12: false,
-  }).format(props.item.date);
+  const date = formatDate(props.item.date);
 
   const deleteMyItemHandler = () => {
     props.onItemDelete(props.id, props.token, props.userId, props.item.fileUrl);

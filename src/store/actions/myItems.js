@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios-orders";
-import { app } from "../../base";
+import app from "../../base";
 
 export const initMyItemsFailed = (error) => {
   return {

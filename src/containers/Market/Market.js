@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import withFirebasePagination from "firebase-react-paginated";
-import { app } from "../../base";
+import app from "../../base";
 import MarketItem from "../../components/MarketItem/MarketItem";
 import MarketModal from "../../components/MarketModal/MarketModal";
 import Modal from "../../components/UI/Modal/Modal";

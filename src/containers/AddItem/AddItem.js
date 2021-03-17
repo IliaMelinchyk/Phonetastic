@@ -5,6 +5,7 @@ import Modal from "../../components/UI/Modal/Modal";
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 import * as actions from "../../store/actions/index";
+import { checkValidity } from "../../shared/utility";
 import classes from "./AddItem.module.scss";
 
 class AddItem extends Component {
@@ -87,7 +88,7 @@ class AddItem extends Component {
       ram: {
         elementType: "select",
         elementConfig: {
-          options: ["0,5 GB", "1 GB", "2 GB", "4 GB", "8 GB", "16 GB"],
+          options: ["0,5 GB", "1 GB", "2 GB", "4 GB", "6 GB", "8 GB", "16 GB"],
         },
         value: "0,5 GB",
         label: `RAM (Random Access Memory)`,
@@ -232,25 +233,6 @@ class AddItem extends Component {
     formIsValid: false,
   };
 
-  checkValidity(value, rules) {
-    let isValid = true;
-
-    // checking rule conditions and making input invalid if they are not met
-    if (rules.required) isValid = value.trim() !== "" && isValid;
-    if (rules.minLength) isValid = value.length >= rules.minLength && isValid;
-    if (rules.maxLength) isValid = value.length <= rules.maxLength && isValid;
-    if (rules.isNumeric) {
-      const pattern = /^\d+$/;
-      isValid = pattern.test(value) && isValid;
-    }
-    if (rules.isEmail) {
-      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-      isValid = pattern.test(value.toLowerCase()) && isValid;
-    }
-
-    return isValid;
-  }
-
   inputChangedHandler = (event, inputIdentifier) => {
     // spreading form from state to update it
     const updatedForm = {
@@ -264,7 +246,7 @@ class AddItem extends Component {
     updatedFormElement.value = event.target.value;
 
     // invoking validity function to check value
-    updatedFormElement.valid = this.checkValidity(
+    updatedFormElement.valid = checkValidity(
       updatedFormElement.value,
       updatedFormElement.validation
     );

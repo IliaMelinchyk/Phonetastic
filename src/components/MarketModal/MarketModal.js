@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./MarketModal.module.scss";
 import NoImage from "../../assets/images/noimg.png";
+import { formatDate } from "../../shared/utility";
 import { IoClose } from "react-icons/io5";
 import { AiFillDollarCircle, AiOutlinePhone } from "react-icons/ai";
 import { GoMail } from "react-icons/go";
@@ -22,15 +23,7 @@ const MarketModal = (props) => {
     fileUrl,
   } = props.item;
 
-  const date = new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    hour12: false,
-  }).format(props.item.date);
-
+  const date = formatDate(props.item.date);
   return (
     <div className={classes.Modal}>
       <div className={classes.ModalHeader}>

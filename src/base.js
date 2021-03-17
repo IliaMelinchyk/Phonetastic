@@ -1,14 +1,16 @@
 import firebase from "firebase";
 import "firebase/storage";
 
-export const app = firebase.initializeApp({
-  projectId: "phone-market-76651",
-  appId: "1:21635168216:web:2f796ff557552d49f7e4ad",
+const app = firebase.initializeApp({
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  appId: process.env.REACT_APP_APP_ID,
   databaseURL: "https://phone-market-76651-default-rtdb.firebaseio.com",
-  storageBucket: "phone-market-76651.appspot.com",
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   locationId: "europe-west",
-  apiKey: "AIzaSyAXT9ngNOZf_ktTlgWep1qi5K92I5KtI7U",
-  authDomain: "phone-market-76651.firebaseapp.com",
-  messagingSenderId: "21635168216",
-  measurementId: "G-39FHEHZWXJ",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  messagingSenderId: process.env.REACT_APP_SENDER_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 });
+
+export default app;
