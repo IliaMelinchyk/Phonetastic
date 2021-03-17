@@ -41,7 +41,6 @@ export const checkAuthTimeout = (expirationTime) => {
 };
 
 export const auth = (email, password, isSignup) => {
-  console.log(app.options.apiKey);
   return (dispatch) => {
     dispatch(authStart());
     const authData = {
