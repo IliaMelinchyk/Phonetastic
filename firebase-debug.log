@@ -1,0 +1,51 @@
+[debug] [2021-04-18T22:06:36.982Z] ----------------------------------------------------------------------
+[debug] [2021-04-18T22:06:36.984Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Смит\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init hosting
+[debug] [2021-04-18T22:06:36.984Z] CLI Version:   9.6.0
+[debug] [2021-04-18T22:06:36.984Z] Platform:      win32
+[debug] [2021-04-18T22:06:36.984Z] Node Version:  v14.15.0
+[debug] [2021-04-18T22:06:36.986Z] Time:          Mon Apr 19 2021 01:06:36 GMT+0300 (Москва, стандартное время)
+[debug] [2021-04-18T22:06:36.986Z] ----------------------------------------------------------------------
+[debug] [2021-04-18T22:06:36.987Z] 
+[debug] [2021-04-18T22:06:36.994Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-04-18T22:06:36.994Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  D:\Projects\phone-selling-site
+
+Before we get started, keep in mind:
+
+  * You are initializing in an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  .firebaserc already has a default project, using phone-market-76651. 
+[debug] [2021-04-18T22:06:42.217Z] > refreshing access token with scopes: []
+[debug] [2021-04-18T22:06:42.217Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-04-18T22:06:42.363Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","date":"Sun, 18 Apr 2021 22:06:46 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-04-18T22:06:42.372Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/phone-market-76651 [none]
+[debug] [2021-04-18T22:06:42.570Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/phone-market-76651 200
+[debug] [2021-04-18T22:06:42.570Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/phone-market-76651 {"projectId":"phone-market-76651","projectNumber":"21635168216","displayName":"Phonetastic","name":"projects/phone-market-76651","resources":{"hostingSite":"phone-market-76651","realtimeDatabaseInstance":"phone-market-76651-default-rtdb","storageBucket":"phone-market-76651.appspot.com","locationId":"europe-west"},"state":"ACTIVE"}
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[info] +  Wrote build/404.html 
+[debug] [2021-04-18T22:07:16.773Z] >>> [apiv2][query] GET https://www.gstatic.com/firebasejs/releases.json [none]
+[debug] [2021-04-18T22:07:16.805Z] <<< [apiv2][status] GET https://www.gstatic.com/firebasejs/releases.json 200
+[debug] [2021-04-18T22:07:16.806Z] <<< [apiv2][body] GET https://www.gstatic.com/firebasejs/releases.json {"current":{"version":"8.4.1","browserURL":"https://www.gstatic.com/firebasejs/8.4.1/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/8.4.1/firebase.tgz"},"live":{"version":"8.4","browserURL":"https://www.gstatic.com/firebasejs/live/8.4/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/live/8.4/firebase.tgz"},"components":{"analytics":"https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js","app":"https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js","auth":"https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js","database":"https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js","firestore":"https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js","functions":"https://www.gstatic.com/firebasejs/8.4.1/firebase-functions.js","installations":"https://www.gstatic.com/firebasejs/8.4.1/firebase-installations.js","messaging":"https://www.gstatic.com/firebasejs/8.4.1/firebase-messaging.js","storage":"https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js","performance":"https://www.gstatic.com/firebasejs/8.4.1/firebase-performance.js","remote-config":"https://www.gstatic.com/firebasejs/8.4.1/firebase-remote-config.js","firestore.memory":"https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.memory.js"}}
