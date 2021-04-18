@@ -7,12 +7,12 @@ const Footer = () => (
     <ul>
       <li className={classes.Mail}>
         <a
-          href="mailto:sm1tphoen1x@gmail.com"
+          href="mailto:iliamelinchyk@gmail.com"
           target="_blank"
           rel="noopener noreferrer"
         >
           <GoMail />
-          sm1tphoen1x@gmail.com
+          iliamelinchyk@gmail.com
         </a>
       </li>
       <li className={classes.Github}>

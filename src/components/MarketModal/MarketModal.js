@@ -24,6 +24,7 @@ const MarketModal = (props) => {
   } = props.item;
 
   const date = formatDate(props.item.date);
+
   return (
     <div className={classes.Modal}>
       <div className={classes.ModalHeader}>
